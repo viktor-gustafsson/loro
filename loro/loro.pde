@@ -2,13 +2,13 @@ import peasy.*;
 import peasy.org.apache.commons.math.*;
 import peasy.org.apache.commons.math.geometry.*;
 
-float x = 0.01;
+float x = 0.1;
 float y = 0;
 float z = 0;
 
 float a = 10;
 float b = 28;
-float c = 8/5;
+float c = 8/3;
 
 float hu=0;
 ArrayList<PVector> points = new ArrayList<PVector>();
@@ -20,7 +20,7 @@ PeasyCam cam;
 void setup() {
   size(800, 600, P3D);
   colorMode(HSB);
-  cam = new PeasyCam(this, 500);
+  cam = new PeasyCam(this, 200);
 }
 
 void draw() {
@@ -34,7 +34,7 @@ void draw() {
 
 
   if (!redraw) {
-    float dt = 0.01;
+    float dt = random(0.005,0.01);
     float dx = a*(y-x)*dt;
     float dy = (x*(b-z)-y)*dt;
     float dz = (x*y-c*z)*dt;
@@ -44,7 +44,7 @@ void draw() {
 
     points.add(new PVector(x, y, z));
 
-    scale(5);
+    scale(2);
     noFill();
     beginShape();
     hu=0; 
@@ -62,7 +62,7 @@ void draw() {
 
 else if (redraw) {
   println(hu);
-    scale(5);
+    scale(2);
     noFill();
     beginShape();
     hu = 0;
@@ -77,7 +77,7 @@ else if (redraw) {
     points.remove(val);
     if (points.size()==0) {
       hu=0;      
-      x=0.01;
+      x=random(0.1,0.9);
       y=0;
       z=0;
     }
