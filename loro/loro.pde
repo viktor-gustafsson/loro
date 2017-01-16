@@ -9,7 +9,8 @@ float z = 0;
 float a = 0;
 float b = 0;
 float c = 0;
-PVector[] cons = new PVector[3];
+PVector[] cons = new PVector[6];
+PVector randVect;
 
 float hu=0;
 ArrayList<PVector> points = new ArrayList<PVector>();
@@ -20,35 +21,44 @@ boolean randomize = false;
 PeasyCam cam;
 
 void setup() {
-  
-  size(800, 600, P3D);
-  colorMode(HSB);
-  cam = new PeasyCam(this, 200);
 
-  cons[0] = new PVector(10, 28, 8/3);
-  cons[1] = new PVector(28, 46.92, 4);
-  cons[2] = new PVector(12, 22, 8/3);
-  a = cons[0].x;
-  b = cons[0].y;
-  c = cons[0].z;
+  size(1024, 768, P3D);
+  colorMode(HSB);
+  cam = new PeasyCam(this, 300);
+
+  //drawing constants
+  cons[0]=new PVector(10, 28, 8/3);
+  cons[1]=new PVector(28, 46.92, 4);
+  cons[2]=new PVector(12, 22, 8/3);
+  cons[3]=new PVector(7, 25, 1.5);
+  cons[4]=new PVector(15, 32, 1);
+  cons[5]=new PVector(16.5, 37.5, 5.2);
+  //set random vector to start drawing
+  //randVect = cons[int(random(cons.size))];
+  randVect = cons[int(random(cons.length))];
+  a = randVect.x;
+  b = randVect.y;
+  c = randVect.z;
 }
 
 void draw() {
-  println(points.size());
   background(0);
-  if (points.size() > random(300, 2000)) {
+  //determine if redrawing is to be done
+  if (points.size() > random(700, 2000)) {
     redraw = true;
-  } 
+  }
+  //redrawign complete start new drawing cycle
   if (points.size()==0 && redraw==true) {
     redraw=false;
     randomize = true;
   }
+  //random new vector to set new drawing pattern
   if (randomize)
   {
-    PVector vect = cons[int(random(cons.length))];
-    a = vect.x;
-    b = vect.y;
-    c = vect.z;
+    randVect = cons[int(random(cons.length))];
+    a = randVect.x;
+    b = randVect.y;
+    c = randVect.z;
 
     randomize = false;
   }
