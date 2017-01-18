@@ -62,6 +62,8 @@ public void setup() {
 }
 
 public void draw() {
+  cam.rotateY(0.005f);
+  cam.rotateX(0.005f);
   background(0);
   //determine if redrawing is to be done
   if (points.size() > random(700, 2000)) {
